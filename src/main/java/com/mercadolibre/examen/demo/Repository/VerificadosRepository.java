@@ -8,6 +8,6 @@ import com.mercadolibre.examen.demo.Entity.ADN;
 @Repository
 public interface VerificadosRepository extends CrudRepository<ADN, Long> {
 
-
+    
 
 }
