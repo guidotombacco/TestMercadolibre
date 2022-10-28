@@ -22,9 +22,7 @@ public class DemoController {
 
     @RequestMapping(path = "/v1/mutant", method = RequestMethod.POST)
     public Boolean Validar(@RequestBody ADNPersona persona){
-
         return xmenService.processADN(persona.adn);
-        
     }
 
     @RequestMapping(path = "/v1/stats", method = RequestMethod.GET)
