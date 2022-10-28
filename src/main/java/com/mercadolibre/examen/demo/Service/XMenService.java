@@ -3,14 +3,20 @@ package com.mercadolibre.examen.demo.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadolibre.examen.demo.Model.Diagonales;
+import com.mercadolibre.examen.demo.Model.Horizontales;
+import com.mercadolibre.examen.demo.Model.Stats;
+import com.mercadolibre.examen.demo.Model.Verticales;
+import com.mercadolibre.examen.demo.Repository.HumanosRepository;
 import com.mercadolibre.examen.demo.Repository.VerificadosRepository;
-import com.mercadolibre.examen.demo.Utils.FormatADN;
+import com.mercadolibre.examen.demo.Utils.FormatADNHumanos;
+import com.mercadolibre.examen.demo.Utils.FormatADNMutantes;
 import com.mercadolibre.examen.demo.validador.DiagonalValidator;
 import com.mercadolibre.examen.demo.validador.DownValidator;
 import com.mercadolibre.examen.demo.validador.RigthValidator;
 
 @Service
-public class XMenService {
+public class XMenService implements IXMenService {
 
     @Autowired
     DownValidator downValidator;
@@ -22,13 +28,19 @@ public class XMenService {
     DiagonalValidator diagonalValidator;
 
     @Autowired
-    VerificadosRepository verificadosRepository;
+    private VerificadosRepository verificadosRepository;
 
     @Autowired
-    FormatADN formatADN;
+    private HumanosRepository humanosRepository;
 
+    @Autowired
+    FormatADNMutantes formatADNMutantes;
+
+    @Autowired
+    FormatADNHumanos formatADNHumanos;
+
+    @Override
     public String[][] processArray(String[] adn) {
-        // TODO Auto-generated method stub
 
         String[][] matriz = new String[adn.length][adn.length];
 
@@ -41,29 +53,35 @@ public class XMenService {
         return matriz;
     }
 
+    @Override
     public Boolean processADN(String[] adn) {
         String[][] matriz = processArray(adn);
+        Integer countMutant = 0;
+        Diagonales diagonales = new Diagonales();
+        Horizontales horizontales = new Horizontales();
+        Verticales verticales = new Verticales();
 
-        int countMutant = 0;
-
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz.length; j++) {
-                // Derecha
-                countMutant += rigthValidator.validate(matriz, i, j);
-                //diagonal
-                countMutant += diagonalValidator.validate(matriz, i, j);
-                // Abajo
-                countMutant += downValidator.validate(matriz, i, j);
-            }
-        }
-        System.out.println(countMutant);
+        diagonales.setDiagonales(matriz);
+        horizontales.setHorizontales(matriz);
+        verticales.setVerticales(matriz);
+        // Derecha
+        countMutant += rigthValidator.validate(horizontales.getHorizontales());
+        // diagonal
+        countMutant += diagonalValidator.validate(diagonales.getDiagonals());
+        // Abajo
+        countMutant += downValidator.validate(verticales.getVerticales());
         if (countMutant > 1) {
-            System.out.println("true");
-            verificadosRepository.save(formatADN.formatADN(matriz));
+            verificadosRepository.save(formatADNMutantes.formatADN(matriz));
             return true;
         } else {
+            humanosRepository.save(formatADNHumanos.formatADN(matriz));
             return false;
         }
+    }
+
+    public void deleteRows() {
+        humanosRepository.deleteAll();
+        verificadosRepository.deleteAll();
     }
 
 }

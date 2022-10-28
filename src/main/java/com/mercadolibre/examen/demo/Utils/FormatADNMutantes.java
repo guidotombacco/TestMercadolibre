@@ -2,18 +2,20 @@ package com.mercadolibre.examen.demo.Utils;
 
 import org.springframework.stereotype.Component;
 
-import com.mercadolibre.examen.demo.Entity.ADN;
+import com.mercadolibre.examen.demo.Entity.Humanos;
+import com.mercadolibre.examen.demo.Entity.Mutantes;
 
 @Component
-public class FormatADN {
+public class FormatADNMutantes {
     
-    public ADN formatADN(String[][] matriz){
-        ADN adn = new ADN();
+    public Mutantes formatADN(String[][] matriz){
+        Mutantes adn = new Mutantes();
+        adn.adn = "";
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 adn.adn += matriz[i][j];
             }
-            if (i < matriz.length) {
+            if (i < matriz.length - 1) {
                 adn.adn += "-"; 
             }
         }

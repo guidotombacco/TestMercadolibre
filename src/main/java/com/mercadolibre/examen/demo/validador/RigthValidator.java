@@ -1,21 +1,31 @@
 package com.mercadolibre.examen.demo.validador;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class RigthValidator {
 
-    public int validate(String[][] matriz, int i, int j) {
-        int derechaCount = 0;
-        for (int k = j + 1; k < (j + 3 > matriz[i].length - j - 1 ? matriz[i].length - j - 1 : j + 4); k++) {
-            if (matriz[i][k] != null && matriz[i][j].equals(matriz[i][k])) {
-                derechaCount++;
+    private Integer mutanCounter;
+
+    public int validate(HashMap<Integer, String> horizontales) {
+        mutanCounter = 0;
+        horizontales.forEach((id, value) -> {
+            String[] letters = value.split("");
+            int count = 0;
+            for (int i = 1; i < letters.length; i++) {
+                if (letters[i - 1].equals(letters[i])) {
+                    count++;
+                }else{
+                    count = 0;
+                }
+                if (count >= 3) {
+                    mutanCounter++;
+                }
             }
-        }
-        if (derechaCount > 2) {
-            return 1;
-        }
-        return 0;
+        });
+        return mutanCounter;
     }
 
 }

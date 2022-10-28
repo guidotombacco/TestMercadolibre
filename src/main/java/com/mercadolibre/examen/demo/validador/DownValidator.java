@@ -1,21 +1,31 @@
 package com.mercadolibre.examen.demo.validador;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class DownValidator {
 
-    public int validate(String[][] matriz, int i, int j) {
-        int abajoCount = 0;
-        for (int k = i + 1; k < (i + 3 > matriz.length - i - 1 ? matriz.length - i - 1 : i + 4); k++) {
-            if (matriz[k][j] != null && matriz[i][j].equals(matriz[k][j])) {
-                abajoCount++;
+    private Integer mutanCounter;
+
+    public int validate(HashMap<Integer, String> verticales) {
+        mutanCounter = 0;
+        verticales.forEach((id, value) -> {
+            String[] letters = value.split("");
+            int count = 0;
+            for (int i = 1; i < letters.length; i++) {
+                if (letters[i - 1].equals(letters[i])) {
+                    count++;
+                } else {
+                    count = 0;
+                }
+                if (count >= 3) {
+                    mutanCounter++;
+                }
             }
-        }
-        if (abajoCount > 2) {
-            return 1;
-        }
-        return 0;
+        });
+        return mutanCounter;
     }
 
 }
