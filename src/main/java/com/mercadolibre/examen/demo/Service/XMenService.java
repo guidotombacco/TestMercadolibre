@@ -3,6 +3,7 @@ package com.mercadolibre.examen.demo.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadolibre.examen.demo.Exceptions.HumanException;
 import com.mercadolibre.examen.demo.Model.Diagonales;
 import com.mercadolibre.examen.demo.Model.Horizontales;
 import com.mercadolibre.examen.demo.Model.Stats;
@@ -75,7 +76,7 @@ public class XMenService implements IXMenService {
             return true;
         } else {
             humanosRepository.save(formatADNHumanos.formatADN(matriz));
-            return false;
+            throw new HumanException();
         }
     }
 
