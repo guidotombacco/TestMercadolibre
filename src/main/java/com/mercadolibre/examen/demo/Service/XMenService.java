@@ -79,9 +79,4 @@ public class XMenService implements IXMenService {
         }
     }
 
-    public void deleteRows() {
-        humanosRepository.deleteAll();
-        verificadosRepository.deleteAll();
-    }
-
 }

@@ -20,18 +20,13 @@ public class DemoController {
     @Autowired
     StatsService statsService;
 
-    @RequestMapping(path = "/v1/mutant", method = RequestMethod.POST)
+    @RequestMapping(path = "/mutant", method = RequestMethod.POST)
     public Boolean Validar(@RequestBody ADNPersona persona){
         return xmenService.processADN(persona.adn);
     }
 
-    @RequestMapping(path = "/v1/stats", method = RequestMethod.GET)
+    @RequestMapping(path = "/stats", method = RequestMethod.GET)
     public Stats Totales(){ 
         return statsService.getStats();
-    }
-
-    @RequestMapping(path = "/v1/reset", method = RequestMethod.DELETE)
-    public void Delete(){ 
-        xmenService.deleteRows();
     }
 }
