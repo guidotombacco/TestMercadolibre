@@ -28,13 +28,11 @@ public class StatsService implements IStatsService {
         stats.setCount_human_dna(humanosRepository.count());
         stats.setCount_mutan_dna(verificadosRepository.count());
         if (stats.getCount_human_dna() > 0) {
-            System.out.println(Double.valueOf(Long.toString(stats.getCount_mutan_dna()))/Double.valueOf(Long.toString(stats.getCount_mutan_dna())));
-            Double porcentaje = Double.valueOf(Long.toString(stats.getCount_mutan_dna()))/Double.valueOf(Long.toString(stats.getCount_mutan_dna()));
-            stats.setRatio(porcentaje);   
+            float finalDecimal = (float)stats.getCount_mutan_dna()/stats.getCount_human_dna();
+            stats.setRatio(finalDecimal);   
         } else {
-            stats.setRatio(0.0);
+            stats.setRatio(0);
         }
-
         return stats;
     }
     

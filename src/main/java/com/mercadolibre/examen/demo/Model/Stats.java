@@ -11,6 +11,6 @@ public class Stats {
     
     public Long count_mutan_dna;
     public Long count_human_dna;
-    public Double ratio;
+    public float ratio;
 
 }
