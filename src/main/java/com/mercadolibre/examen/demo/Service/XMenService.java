@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.mercadolibre.examen.demo.Exceptions.HumanException;
 import com.mercadolibre.examen.demo.Model.Diagonales;
 import com.mercadolibre.examen.demo.Model.Horizontales;
-import com.mercadolibre.examen.demo.Model.Stats;
 import com.mercadolibre.examen.demo.Model.Verticales;
 import com.mercadolibre.examen.demo.Repository.HumanosRepository;
 import com.mercadolibre.examen.demo.Repository.VerificadosRepository;

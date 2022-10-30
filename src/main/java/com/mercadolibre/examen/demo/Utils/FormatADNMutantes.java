@@ -2,7 +2,6 @@ package com.mercadolibre.examen.demo.Utils;
 
 import org.springframework.stereotype.Component;
 
-import com.mercadolibre.examen.demo.Entity.Humanos;
 import com.mercadolibre.examen.demo.Entity.Mutantes;
 
 @Component

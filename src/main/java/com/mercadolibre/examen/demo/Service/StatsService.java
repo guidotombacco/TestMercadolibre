@@ -22,7 +22,6 @@ public class StatsService implements IStatsService {
 
     @Override
     public Stats getStats() {
-        // TODO Auto-generated method stub
         
         Stats stats = new Stats();
         stats.setCount_human_dna(humanosRepository.count());
