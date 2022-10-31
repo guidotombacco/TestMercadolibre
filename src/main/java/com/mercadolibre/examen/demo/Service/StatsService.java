@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.mercadolibre.examen.demo.Model.Stats;
 import com.mercadolibre.examen.demo.Repository.HumanosRepository;
 import com.mercadolibre.examen.demo.Repository.VerificadosRepository;
-import com.mercadolibre.examen.demo.Utils.GCD;
 
 @Service
 public class StatsService implements IStatsService {
@@ -17,8 +16,6 @@ public class StatsService implements IStatsService {
     @Autowired
     VerificadosRepository verificadosRepository;
 
-    @Autowired
-    GCD gcd;
 
     @Override
     public Stats getStats() {
